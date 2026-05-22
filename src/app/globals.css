@@ -1,26 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0908;
+  --foreground: #f4f3f0;
+  
+  --font-sans: 'Inter', sans-serif;
+  --font-outfit: 'Outfit', sans-serif;
+  --font-playfair: 'Playfair Display', serif;
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  
+  --color-warm-black: #0a0908;
+  --color-warm-dark: #12100e;
+  --color-warm-card: #1c1a18;
+  --color-warm-gray: #2e2a27;
+  --color-warm-border: rgba(234, 179, 8, 0.08);
+  
+  --color-gold-light: #fef08a;
+  --color-gold: #eab308;
+  --color-gold-dark: #ca8a04;
+  --color-amber-glow: #f59e0b;
+  --color-terracotta: #d97706;
+  --color-clay: #ea580c;
+  --color-earth-sand: #e7e5e4;
+  --color-earth-mud: #78716c;
+  
+  --font-sans: 'Inter', sans-serif;
+  --font-outfit: 'Outfit', sans-serif;
+  --font-playfair: 'Playfair Display', serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Custom Webkit scrollbar for premium touch */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0908;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2e2a27;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #eab308;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0a0908;
+  color: #f4f3f0;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Glassmorphic Classes */
+.glass-panel {
+  background: rgba(18, 16, 14, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(234, 179, 8, 0.07);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  background: rgba(28, 26, 24, 0.8);
+  border-color: rgba(234, 179, 8, 0.2);
+  box-shadow: 0 12px 40px -12px rgba(217, 119, 6, 0.15);
+  transform: translateY(-2px);
+}
+
+.glass-card-amber {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.04) 0%, rgba(217, 119, 6, 0.02) 100%);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(245, 158, 11, 0.1);
+}
+
+/* Animated Ambient Glow Bulbs */
+.ambient-glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 9999px;
+  filter: blur(120px);
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: screen;
+  animation: float 20s infinite alternate;
+}
+
+.ambient-amber {
+  background: radial-gradient(circle, #f59e0b 0%, rgba(217,119,6,0) 70%);
+  top: -100px;
+  right: -100px;
+}
+
+.ambient-terracotta {
+  background: radial-gradient(circle, #ea580c 0%, rgba(217,119,6,0) 70%);
+  bottom: -150px;
+  left: -150px;
+  animation-delay: -5s;
+}
+
+.ambient-gold {
+  background: radial-gradient(circle, #eab308 0%, rgba(254,240,138,0) 70%);
+  top: 40%;
+  left: 30%;
+  width: 400px;
+  height: 400px;
+  opacity: 0.08;
+  animation-delay: -10s;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(40px, 30px) scale(1.1);
+  }
+  100% {
+    transform: translate(-20px, -40px) scale(0.95);
+  }
+}
+
+/* Typography styles */
+.font-outfit {
+  font-family: var(--font-outfit);
+}
+
+.font-playfair {
+  font-family: var(--font-playfair);
+}
+
+/* Hide native video controls but maintain pointer events */
+.hide-video-controls::-webkit-media-controls {
+  display: none !important;
+}
+
+/* Sparkle match animation */
+@keyframes sparkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+.animate-sparkle {
+  animation: sparkle 2s infinite ease-in-out;
 }
