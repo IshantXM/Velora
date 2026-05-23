@@ -1,0 +1,149 @@
+@{
+    ViewData["Title"] = "Velora - Skip swiping. Feel chemistry.";
+}
+
+<!-- Canvas Confetti Local -->
+<script src="~/js/confetti.js"></script>
+
+<div id="app-container" class="relative min-h-screen flex flex-col justify-between overflow-x-hidden">
+    
+    <!-- Navigation Bar (Dynamic visibility) -->
+    <nav id="global-nav" class="hidden z-40 fixed top-0 left-0 right-0 glass-panel border-b border-white/5 px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('dashboard')">
+            <span class="text-xl font-bold font-outfit tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-gold-light via-amber-glow to-terracotta">
+                VELORA
+            </span>
+            <span class="px-2 py-0.5 text-[8px] tracking-widest font-semibold uppercase rounded-full border border-gold/20 bg-gold/5 text-gold-light font-outfit">
+                BETA
+            </span>
+        </div>
+        
+        <!-- Navigation Links -->
+        <div class="hidden md:flex items-center gap-6">
+            <button onclick="navigateTo('matcher')" class="nav-link text-xs uppercase tracking-widest font-semibold font-outfit text-stone-400 hover:text-white transition duration-200 py-1" data-view="matcher">Matcher</button>
+            <button onclick="navigateTo('reels')" class="nav-link text-xs uppercase tracking-widest font-semibold font-outfit text-stone-400 hover:text-white transition duration-200 py-1" data-view="reels">Reels</button>
+            <button onclick="navigateTo('standup')" class="nav-link text-xs uppercase tracking-widest font-semibold font-outfit text-stone-400 hover:text-white transition duration-200 py-1" data-view="standup">StandUp</button>
+            <button onclick="navigateTo('chat')" class="nav-link text-xs uppercase tracking-widest font-semibold font-outfit text-stone-400 hover:text-white transition duration-200 py-1 flex items-center gap-1.5" data-view="chat">
+                Chat <span id="chat-badge" class="hidden w-2 h-2 rounded-full bg-amber-glow animate-pulse"></span>
+            </button>
+            <button onclick="navigateTo('rooms')" class="nav-link text-xs uppercase tracking-widest font-semibold font-outfit text-stone-400 hover:text-white transition duration-200 py-1 flex items-center gap-1.5" data-view="rooms">
+                Live Rooms <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+            </button>
+            <button onclick="navigateTo('dashboard')" class="nav-link text-xs uppercase tracking-widest font-semibold font-outfit text-stone-400 hover:text-white transition duration-200 py-1" data-view="dashboard">Insights</button>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <div id="nav-user-profile" class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('dashboard')">
+                <span id="nav-user-name" class="text-xs font-semibold font-outfit text-stone-300">Aura Seeker</span>
+                <img id="nav-user-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150&h=150" class="w-8 h-8 rounded-xl object-cover border border-white/10" alt="avatar">
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Viewport -->
+    <main class="flex-grow w-full relative pt-[70px] md:pt-[80px] pb-24 md:pb-8">
+        @await Html.PartialAsync("_LandingHero")
+        @await Html.PartialAsync("_Onboarding")
+        @await Html.PartialAsync("_MatchExplorer")
+        @await Html.PartialAsync("_ReelFeed")
+        @await Html.PartialAsync("_StandUpArena")
+        @await Html.PartialAsync("_ChatSpace")
+        @await Html.PartialAsync("_LiveRooms")
+        @await Html.PartialAsync("_AiDashboard")
+    </main>
+
+    @await Html.PartialAsync("_MatchModal")
+ 
+    <!-- Edit Profile Modal -->
+    <div id="edit-profile-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/85 backdrop-blur-sm">
+        <div class="w-full max-w-md glass-panel rounded-3xl p-6 border border-white/10 relative text-left overflow-y-auto max-h-[90vh] shadow-2xl">
+            <button onclick="closeEditProfileModal()" class="absolute top-4 right-4 text-stone-500 hover:text-white">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <h3 class="text-lg font-bold font-outfit uppercase tracking-widest text-stone-200 mb-1">Edit Calibration Profile</h3>
+            <p class="text-xs text-stone-400 mb-4">Update your student node details and avatar image.</p>
+            
+            <div class="space-y-4">
+                <div class="space-y-2">
+                    <label class="text-[10px] font-outfit tracking-widest uppercase text-stone-400">Profile Picture</label>
+                    <div class="flex items-center gap-4">
+                        <img id="edit-profile-avatar-preview" src="" class="w-14 h-14 rounded-xl object-cover border border-white/10 shadow-lg">
+                        <div class="flex-grow space-y-2">
+                            <div>
+                                <input type="file" id="edit-profile-avatar-file" accept="image/*" class="hidden" onchange="handleEditProfileAvatarUpload(this)">
+                                <button type="button" onclick="document.getElementById('edit-profile-avatar-file').click()" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg font-outfit uppercase tracking-wider transition bg-white/5 border border-white/10 hover:bg-white/10 text-stone-300 flex items-center justify-center gap-1">
+                                    <i data-lucide="upload" class="w-3 h-3"></i> Upload File
+                                </button>
+                            </div>
+                            <input type="text" id="edit-profile-avatar-url" placeholder="Or paste image URL..." oninput="handleEditProfileAvatarUrl(this.value)" class="w-full bg-white/[0.03] border border-white/5 rounded-lg px-3 py-1.5 text-stone-200 placeholder-stone-600 text-xs focus:outline-none focus:border-gold/30">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="col-span-2 space-y-1">
+                        <label class="text-[10px] font-outfit uppercase tracking-widest text-stone-400">Name</label>
+                        <input type="text" id="edit-profile-name" class="w-full bg-white/[0.03] border border-white/5 rounded-xl px-3 py-2 text-stone-200 text-xs focus:outline-none focus:border-gold/30">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-outfit tracking-widest uppercase text-stone-400">Age</label>
+                        <input type="number" id="edit-profile-age" min="18" max="30" class="w-full bg-white/[0.03] border border-white/5 rounded-xl px-3 py-2 text-stone-200 text-xs focus:outline-none focus:border-gold/30">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-outfit tracking-widest uppercase text-stone-400">City</label>
+                        <input type="text" id="edit-profile-city" class="w-full bg-white/[0.03] border border-white/5 rounded-xl px-3 py-2 text-stone-200 text-xs focus:outline-none focus:border-gold/30">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-outfit tracking-widest uppercase text-stone-400">Country</label>
+                        <input type="text" id="edit-profile-country" class="w-full bg-white/[0.03] border border-white/5 rounded-xl px-3 py-2 text-stone-200 text-xs focus:outline-none focus:border-gold/30">
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-[10px] font-outfit tracking-widest uppercase text-stone-400">Bio</label>
+                    <textarea id="edit-profile-bio" rows="2" class="w-full bg-white/[0.03] border border-white/5 rounded-xl px-3 py-2 text-stone-200 text-xs focus:outline-none focus:border-gold/30 resize-none"></textarea>
+                </div>
+
+                <button onclick="saveEditProfile()" class="w-full py-3 text-xs font-bold font-outfit uppercase tracking-wider rounded-xl bg-gradient-to-r from-amber-glow to-terracotta text-warm-black mt-2">
+                    Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation Bottom Panel -->
+    <div id="mobile-nav" class="hidden z-40 fixed bottom-0 left-0 right-0 glass-panel border-t border-white/5 py-3 px-4 flex items-center justify-around md:hidden">
+        <button onclick="navigateTo('matcher')" class="mobile-nav-btn flex flex-col items-center gap-1 text-[9px] text-stone-500 font-outfit" data-view="matcher">
+            <i data-lucide="sparkles" class="w-4 h-4"></i> Matcher
+        </button>
+        <button onclick="navigateTo('reels')" class="mobile-nav-btn flex flex-col items-center gap-1 text-[9px] text-stone-500 font-outfit" data-view="reels">
+            <i data-lucide="film" class="w-4 h-4"></i> Reels
+        </button>
+        <button onclick="navigateTo('standup')" class="mobile-nav-btn flex flex-col items-center gap-1 text-[9px] text-stone-500 font-outfit" data-view="standup">
+            <i data-lucide="mic" class="w-4 h-4"></i> StandUp
+        </button>
+        <button onclick="navigateTo('chat')" class="mobile-nav-btn flex flex-col items-center gap-1 text-[9px] text-stone-500 font-outfit relative" data-view="chat">
+            <span id="chat-mobile-badge" class="hidden absolute top-0 right-2 w-1.5 h-1.5 rounded-full bg-amber-glow"></span>
+            <i data-lucide="message-square" class="w-4 h-4"></i> Chat
+        </button>
+        <button onclick="navigateTo('rooms')" class="mobile-nav-btn flex flex-col items-center gap-1 text-[9px] text-stone-500 font-outfit" data-view="rooms">
+            <i data-lucide="users" class="w-4 h-4"></i> Rooms
+        </button>
+        <button onclick="navigateTo('dashboard')" class="mobile-nav-btn flex flex-col items-center gap-1 text-[9px] text-stone-500 font-outfit" data-view="dashboard">
+            <i data-lucide="brain" class="w-4 h-4"></i> Insights
+        </button>
+    </div>
+
+</div>
+
+@section Scripts {
+    <!-- Mock Databases -->
+    <script src="~/js/data/mockData.js"></script>
+    <!-- 3D Globe Component -->
+    <script src="~/js/components/globe.js"></script>
+    <!-- Core Application Controller -->
+    <script src="~/js/app.js"></script>
+}

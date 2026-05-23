@@ -1,0 +1,102 @@
+/* Custom Webkit scrollbar for premium touch */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0908;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2e2a27;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00e5a3;
+}
+
+/* Glassmorphic Classes */
+.glass-panel {
+  background: rgba(18, 16, 14, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 181, 255, 0.07);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  background: rgba(28, 26, 24, 0.8);
+  border-color: rgba(138, 92, 245, 0.2);
+  box-shadow: 0 12px 40px -12px rgba(138, 92, 245, 0.15);
+  transform: translateY(-2px);
+}
+
+.glass-card-amber {
+  background: linear-gradient(135deg, rgba(0, 181, 255, 0.04) 0%, rgba(138, 92, 245, 0.02) 100%);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 181, 255, 0.1);
+}
+
+/* Animated Ambient Glow Bulbs */
+.ambient-glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 9999px;
+  filter: blur(120px);
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: screen;
+  animation: float 20s infinite alternate;
+}
+
+.ambient-amber {
+  background: radial-gradient(circle, #00b5ff 0%, rgba(0, 181, 255, 0) 70%);
+  top: -100px;
+  right: -100px;
+}
+
+.ambient-terracotta {
+  background: radial-gradient(circle, #8a5cf5 0%, rgba(138, 92, 245, 0) 70%);
+  bottom: -150px;
+  left: -150px;
+  animation-delay: -5s;
+}
+
+.ambient-gold {
+  background: radial-gradient(circle, #00e5a3 0%, rgba(0, 229, 163, 0) 70%);
+  top: 40%;
+  left: 30%;
+  width: 400px;
+  height: 400px;
+  opacity: 0.08;
+  animation-delay: -10s;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(40px, 30px) scale(1.1);
+  }
+  100% {
+    transform: translate(-20px, -40px) scale(0.95);
+  }
+}
+
+/* Sparkle match animation */
+@keyframes sparkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+.animate-sparkle {
+  animation: sparkle 2s infinite ease-in-out;
+}

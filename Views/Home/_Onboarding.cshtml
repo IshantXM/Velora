@@ -1,0 +1,244 @@
+<section id="view-onboarding" class="view-panel hidden w-full min-h-[calc(100vh-80px)] flex items-center justify-center p-6 relative">
+    <div class="ambient-glow ambient-amber opacity-[0.08]"></div>
+    <div class="ambient-glow ambient-terracotta opacity-[0.08]"></div>
+
+    <div class="w-full max-w-xl glass-panel rounded-3xl p-8 relative z-10 border border-white/5 flex flex-col justify-between min-h-[550px] shadow-2xl">
+        <div class="flex items-center justify-between border-b border-white/5 pb-4 mb-6">
+            <div>
+                <span class="text-[10px] font-outfit uppercase tracking-widest text-stone-500">Aura Calibration</span>
+                <h2 class="text-sm font-semibold font-outfit text-white">Step <span id="onboarding-step-num">1</span> of 4</h2>
+            </div>
+            <div class="flex gap-1.5" id="onboarding-progress-dots"></div>
+        </div>
+
+        <div class="flex-grow flex flex-col justify-center">
+            <!-- Step 1 -->
+            <div id="onboarding-step1" class="onboarding-substep space-y-5">
+                <div class="space-y-1">
+                    <h3 class="text-xl font-semibold font-playfair text-stone-100">Tell us about your aura</h3>
+                    <p class="text-xs text-stone-400">Introduce yourself to the global chemical mesh.</p>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] font-outfit tracking-widest uppercase text-stone-400">Select Identity Image</label>
+                    <div class="flex gap-4" id="avatar-presets-container"></div>
+                    <div class="flex flex-col sm:flex-row gap-3 pt-2 items-center">
+                        <div class="w-full">
+                            <label class="block text-[8px] font-mono text-stone-500 uppercase tracking-widest mb-1">Upload image file</label>
+                            <input type="file" id="onboard-avatar-file" accept="image/*" class="hidden" onchange="handleCustomAvatarUpload(this)">
+                            <button type="button" onclick="document.getElementById('onboard-avatar-file').click()" class="w-full px-4 py-2.5 text-xs font-semibold rounded-xl font-outfit uppercase tracking-wider transition bg-white/5 border border-white/10 hover:bg-white/10 text-stone-300 flex items-center justify-center gap-1.5">
+                                <i data-lucide="upload" class="w-3.5 h-3.5"></i> Choose File
+                            </button>
+                        </div>
+                        <div class="w-full">
+                            <label class="block text-[8px] font-mono text-stone-500 uppercase tracking-widest mb-1">Or paste image URL</label>
+                            <input type="text" id="onboard-avatar-url" placeholder="Paste custom URL..." oninput="handleCustomAvatarUrl(this.value)" class="w-full bg-white/[0.03] border border-white/5 rounded-xl px-3 py-2.5 text-stone-200 placeholder-stone-600 text-xs focus:outline-none focus:border-gold/30 transition">
+                        </div>
+                    </div>
+                    <div id="custom-avatar-status" class="hidden text-[9px] text-emerald-400 font-mono flex items-center gap-1">
+                        <i data-lucide="check-circle" class="w-3 h-3"></i> Custom photo loaded
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="col-span-2 space-y-1">
+                        <label class="text-[10px] font-outfit tracking-widest uppercase text-stone-400">What do we call you?</label>
+                        <input type="text" id="onboard-name" placeholder="E.g., Ishant" class="w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-stone-200 placeholder-stone-600 text-sm focus:outline-none focus:border-gold/30 transition">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-outfit tracking-widest uppercase text-stone-400">Age</label>
+                        <input type="number" id="onboard-age" min="18" max="30" value="21" class="w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-stone-200 text-sm focus:outline-none focus:border-gold/30 transition">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-outfit tracking-widest uppercase text-stone-400">City</label>
+                        <input type="text" id="onboard-city" placeholder="E.g., Berlin" class="w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-stone-200 placeholder-stone-600 text-sm focus:outline-none focus:border-gold/30 transition">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-outfit tracking-widest uppercase text-stone-400">Country</label>
+                        <input type="text" id="onboard-country" placeholder="E.g., Germany" class="w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-stone-200 placeholder-stone-600 text-sm focus:outline-none focus:border-gold/30 transition">
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-[10px] font-outfit tracking-widest uppercase text-stone-400">Mini editorial bio</label>
+                    <textarea id="onboard-bio" rows="2" placeholder="E.g., Building a sustainable clay filtration system. Love 3 AM techno clubs and high-end street food." class="w-full bg-white/[0.03] border border-white/5 rounded-xl px-4 py-3 text-stone-200 placeholder-stone-600 text-sm focus:outline-none focus:border-gold/30 transition resize-none"></textarea>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div id="onboarding-step2" class="onboarding-substep hidden space-y-6">
+                <div class="space-y-1">
+                    <h3 class="text-xl font-semibold font-playfair text-stone-100">Set your Chemistry Dials</h3>
+                    <p class="text-xs text-stone-400">Drag sliders to calibrate your personality index metrics.</p>
+                </div>
+
+                <div class="space-y-2">
+                    <div class="flex justify-between text-xs font-outfit uppercase tracking-wider">
+                        <span class="text-stone-400">Humor Style</span>
+                        <span id="onboard-humor-label" class="text-amber-glow font-bold">Balanced Witty 🎭</span>
+                    </div>
+                    <input type="range" id="onboard-humor" min="0" max="100" value="50" class="w-full h-1.5 bg-warm-gray rounded-lg appearance-none cursor-pointer accent-amber-glow" oninput="updateHumorLabel(this.value)">
+                    <div class="flex justify-between text-[10px] text-stone-500 font-mono">
+                        <span>DRY & DEADPAN</span>
+                        <span>SLAPSTICK & EXUBERANT</span>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <div class="flex justify-between text-xs font-outfit uppercase tracking-wider">
+                        <span class="text-stone-400">Ambition Alignment</span>
+                        <span id="onboard-ambition-label" class="text-terracotta font-bold">Harmonious Builder ⚖️</span>
+                    </div>
+                    <input type="range" id="onboard-ambition" min="0" max="100" value="50" class="w-full h-1.5 bg-warm-gray rounded-lg appearance-none cursor-pointer accent-terracotta" oninput="updateAmbitionLabel(this.value)">
+                    <div class="flex justify-between text-[10px] text-stone-500 font-mono">
+                        <span>RELAXED LIFESTYLE</span>
+                        <span>STARTUP GRIND</span>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <div class="flex justify-between text-xs font-outfit uppercase tracking-wider">
+                        <span class="text-stone-400">Sleep Footprint</span>
+                        <span id="onboard-sleep-label" class="text-gold font-bold">Midday Anchor ⛅</span>
+                    </div>
+                    <input type="range" id="onboard-sleep" min="0" max="100" value="50" class="w-full h-1.5 bg-warm-gray rounded-lg appearance-none cursor-pointer accent-gold" oninput="updateSleepLabel(this.value)">
+                    <div class="flex justify-between text-[10px] text-stone-500 font-mono">
+                        <span>EARLY BIRD (5 AM)</span>
+                        <span>NIGHT OWL (3 AM)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div id="onboarding-step3" class="onboarding-substep hidden space-y-5">
+                <div class="space-y-1">
+                    <h3 class="text-xl font-semibold font-playfair text-stone-100">Verify Credentials</h3>
+                    <p class="text-xs text-stone-400">Enter and verify your college node. GitHub and LinkedIn sync are optional.</p>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/5 space-y-3 relative">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-glow">
+                            <i data-lucide="award" class="w-5 h-5"></i>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="text-sm font-semibold text-stone-200 flex items-center gap-1.5">
+                                Academic Node Verification <span class="text-rose-500 text-[10px] font-bold uppercase tracking-widest">* Required</span>
+                            </h4>
+                            <p class="text-[10px] text-stone-500">Unlocks access. Verification via university database email simulated below.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <input type="text" id="onboard-uni" placeholder="Enter University name (e.g. Stanford)" class="flex-grow bg-white/[0.02] border border-white/5 rounded-lg px-3 py-2 text-stone-300 placeholder-stone-600 text-xs focus:outline-none focus:border-gold/30 transition">
+                        <button type="button" id="onboard-uni-verify-btn" onclick="verifyUniversityAction()" class="px-4 py-2 text-xs font-semibold rounded-lg font-outfit uppercase tracking-wider transition bg-gradient-to-r from-amber-glow to-terracotta text-warm-black">
+                            Verify
+                        </button>
+                    </div>
+                    <div id="onboard-uni-status" class="text-[10px] text-left text-stone-500 flex items-center gap-1">
+                        <i data-lucide="alert-circle" class="w-3 h-3 text-stone-600"></i> Status: Unverified
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between p-4 rounded-2xl bg-white/[0.02] border border-white/5">
+                    <div class="flex items-center gap-3 text-left">
+                        <div class="p-2.5 rounded-xl bg-neutral-900 border border-neutral-800 text-stone-300">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-stone-200">GitHub Developer Badge</h4>
+                            <p class="text-[10px] text-stone-500">Unlocks "Dev" badge & repository metrics</p>
+                        </div>
+                    </div>
+                    <button type="button" id="onboard-git-btn" onclick="verifyGitAction()" class="px-4 py-2 text-xs font-semibold rounded-lg font-outfit uppercase tracking-wider transition bg-white/5 border border-white/10 hover:bg-white/10 text-stone-200">
+                        Connect
+                    </button>
+                </div>
+
+                <div class="flex items-center justify-between p-4 rounded-2xl bg-white/[0.02] border border-white/5">
+                    <div class="flex items-center gap-3 text-left">
+                        <div class="p-2.5 rounded-xl bg-[#0a66c2]/10 border border-[#0a66c2]/20 text-[#0a66c2]">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-stone-200">LinkedIn Career Verification</h4>
+                            <p class="text-[10px] text-stone-500">Unlocks "Founder" or "Researcher" badge</p>
+                        </div>
+                    </div>
+                    <button type="button" id="onboard-linked-btn" onclick="verifyLinkedAction()" class="px-4 py-2 text-xs font-semibold rounded-lg font-outfit uppercase tracking-wider transition bg-white/5 border border-white/10 hover:bg-white/10 text-stone-200">
+                        Connect
+                    </button>
+                </div>
+
+                <div id="onboarding-step3-error" class="hidden text-xs text-rose-500 text-left flex items-center gap-1.5 bg-rose-500/10 border border-rose-500/20 p-2.5 rounded-xl animate-pulse">
+                    <i data-lucide="alert-triangle" class="w-4 h-4 shrink-0"></i>
+                    <span>You must enter your University name and click "Verify" to calibrate your academic node before entering Velora.</span>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div id="onboarding-step4" class="onboarding-substep hidden space-y-6 flex flex-col items-center text-center">
+                <div class="w-12 h-12 bg-amber-glow/10 rounded-2xl flex items-center justify-center border border-amber-glow/20 text-amber-glow mb-2">
+                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                </div>
+                <div class="space-y-1">
+                    <h3 class="text-xl font-semibold font-playfair text-stone-100">Aura Calibration Complete</h3>
+                    <p class="text-xs text-stone-400">Here is your verified Velora chemical matrix snapshot.</p>
+                </div>
+
+                <div class="w-full max-w-sm rounded-2xl p-5 border border-white/10 bg-gradient-to-b from-stone-900/80 to-stone-950/80 text-left space-y-4 shadow-xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-amber-glow to-transparent opacity-10 rounded-full blur-xl"></div>
+                    
+                    <div class="flex gap-4">
+                        <img id="onboard-preview-avatar" src="" alt="avatar" class="w-14 h-14 rounded-xl object-cover border border-white/10 shadow-lg">
+                        <div>
+                            <h4 class="text-base font-bold text-white flex items-center gap-1.5 font-outfit">
+                                <span id="onboard-preview-name">Aura Seeker</span>, <span id="onboard-preview-age">21</span>
+                            </h4>
+                            <p class="text-[10px] text-stone-400 flex items-center gap-1">
+                                <i data-lucide="compass" class="w-3 h-3 text-terracotta"></i> 
+                                <span id="onboard-preview-location">San Francisco, US</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <p class="text-[11px] text-stone-300 italic leading-relaxed">
+                        "<span id="onboard-preview-bio">Building the future, researching connection.</span>"
+                    </p>
+
+                    <div class="border-t border-white/5 pt-3 flex flex-wrap gap-1.5" id="onboard-preview-badges"></div>
+
+                    <div class="space-y-2 border-t border-white/5 pt-3">
+                        <div class="grid grid-cols-3 gap-2 text-[10px] text-stone-400">
+                            <div>
+                                <span class="block text-[8px] font-mono text-stone-500">HUMOR</span>
+                                <span class="font-semibold text-amber-glow" id="onboard-preview-humor">50%</span>
+                            </div>
+                            <div>
+                                <span class="block text-[8px] font-mono text-stone-500">AMBITION</span>
+                                <span class="font-semibold text-terracotta" id="onboard-preview-ambition">50%</span>
+                            </div>
+                            <div>
+                                <span class="block text-[8px] font-mono text-stone-500">SLEEP STYLE</span>
+                                <span class="font-semibold text-gold" id="onboard-preview-sleep">50%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex items-center justify-between border-t border-white/5 pt-6 mt-6">
+            <button onclick="onboardingBack()" class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-stone-400 hover:text-white transition duration-200">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back
+            </button>
+            
+            <button id="onboarding-next-btn" onclick="onboardingNext()" class="flex items-center gap-2 px-6 py-3 text-xs font-semibold uppercase tracking-wider rounded-xl transition duration-300 bg-gradient-to-r from-amber-glow to-terracotta hover:shadow-[0_0_20px_rgba(0,181,255,0.25)] text-warm-black">
+                <span id="onboarding-next-text">Continue</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </div>
+</section>

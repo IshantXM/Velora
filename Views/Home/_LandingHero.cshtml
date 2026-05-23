@@ -1,0 +1,78 @@
+<section id="view-landing" class="view-panel w-full min-h-[calc(100vh-80px)] flex flex-col justify-between px-6 py-4 md:px-12 md:py-8 relative">
+    <div class="ambient-glow ambient-amber"></div>
+    <div class="ambient-glow ambient-terracotta"></div>
+    <div class="ambient-glow ambient-gold"></div>
+
+    <header class="z-10 w-full flex items-center justify-between">
+        <div class="flex items-center gap-2">
+            <span class="text-2xl font-bold font-outfit tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-gold-light via-amber-glow to-terracotta">
+                VELORA
+            </span>
+            <span class="px-2 py-0.5 text-[10px] tracking-widest font-semibold uppercase rounded-full border border-gold/20 bg-gold/5 text-gold-light font-outfit">
+                BETA
+            </span>
+        </div>
+        <button onclick="navigateTo('onboarding')" class="px-4 py-2 text-xs font-medium font-outfit tracking-widest uppercase border border-white/10 hover:border-gold/30 hover:bg-gold/5 transition duration-300 rounded-full text-stone-300 hover:text-gold-light">
+            Enter Platform
+        </button>
+    </header>
+
+    <div class="z-10 w-full flex-grow grid grid-cols-1 lg:grid-cols-12 gap-8 items-center py-8">
+        <div class="lg:col-span-6 flex flex-col items-start justify-center gap-6 max-w-xl text-left">
+            <div class="flex items-center gap-2 px-3 py-1 rounded-full border border-gold/10 bg-gold/5 text-amber-glow">
+                <i data-lucide="zap" class="w-3.5 h-3.5 fill-amber-glow animate-pulse"></i>
+                <span class="text-[11px] font-outfit tracking-widest uppercase font-semibold">Skip swiping. Feel chemistry.</span>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight text-white font-playfair">
+                Where <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-gold-light via-amber-glow to-terracotta">ambition</span> meets genuine <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-terracotta to-clay">chemistry.</span>
+            </h1>
+
+            <p class="text-stone-400 text-sm md:text-base leading-relaxed">
+                Velora is a futuristic, premium social chemistry platform for college students, founders, creators, and researchers. We connect global minds through humor evaluation, lifestyle metrics, and real-time cultural dialogue instead of superficial photo-swiping.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-4">
+                <button onclick="navigateTo('onboarding')" class="group relative flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-glow via-terracotta to-clay text-warm-black font-semibold font-outfit tracking-wider uppercase rounded-xl hover:shadow-[0_0_30px_rgba(0,181,255,0.3)] transition-all duration-300 text-sm cursor-pointer">
+                    Initialize Aura
+                    <i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                </button>
+                <button onclick="navigateTo('reels')" class="flex items-center justify-center gap-2 px-8 py-4 bg-white/5 border border-white/10 hover:bg-white/10 text-stone-200 hover:text-white font-semibold font-outfit tracking-wider uppercase rounded-xl transition duration-300 text-sm cursor-pointer">
+                    Explore Reels
+                </button>
+            </div>
+        </div>
+
+        <div class="lg:col-span-6 relative w-full h-[320px] md:h-[450px] lg:h-[500px] flex items-center justify-center">
+            <div id="globe-parent-container" class="w-full h-full">
+                <canvas id="globe-canvas" class="w-full h-full cursor-grab active:cursor-grabbing opacity-90"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <footer class="z-10 w-full grid grid-cols-3 gap-4 border-t border-white/5 pt-6">
+        <div class="flex flex-col items-center md:items-start text-center md:text-left gap-1">
+            <div class="flex items-center gap-1.5 text-stone-400 justify-center md:justify-start">
+                <i data-lucide="globe" class="w-4 h-4 text-amber-glow"></i>
+                <span class="text-[9px] md:text-xs font-outfit uppercase tracking-widest">Global Nodes</span>
+            </div>
+            <span class="text-base md:text-2xl font-bold text-white font-outfit tracking-tight">14,248</span>
+        </div>
+        
+        <div class="flex flex-col items-center md:items-start text-center md:text-left gap-1 border-x border-white/5">
+            <div class="flex items-center gap-1.5 text-stone-400 justify-center md:justify-start">
+                <i data-lucide="sparkles" class="w-4 h-4 text-terracotta"></i>
+                <span class="text-[9px] md:text-xs font-outfit uppercase tracking-widest">Humor Matches</span>
+            </div>
+            <span class="text-base md:text-2xl font-bold text-white font-outfit tracking-tight">98.4%</span>
+        </div>
+
+        <div class="flex flex-col items-center md:items-start text-center md:text-left gap-1">
+            <div class="flex items-center gap-1.5 text-stone-400 justify-center md:justify-start">
+                <i data-lucide="users" class="w-4 h-4 text-gold"></i>
+                <span class="text-[9px] md:text-xs font-outfit uppercase tracking-widest">Countries connected</span>
+            </div>
+            <span class="text-base md:text-2xl font-bold text-white font-outfit tracking-tight">62</span>
+        </div>
+    </footer>
+</section>

@@ -1,0 +1,41 @@
+<section id="view-standup" class="view-panel hidden w-full max-w-xl mx-auto px-4 space-y-6">
+    <div class="flex items-center justify-between border-b border-white/5 pb-4 mb-2 text-left">
+        <div>
+            <h2 class="text-2xl font-bold font-playfair text-white flex items-center gap-2">
+                StandUp Arena
+            </h2>
+            <p class="text-xs text-stone-400">Perform micro-clips. Calibrate matching algorithms based on voice & wit.</p>
+        </div>
+        <button onclick="openUploadModal()" class="px-4 py-2 text-xs font-semibold font-outfit uppercase tracking-widest rounded-xl bg-gradient-to-r from-amber-glow to-terracotta text-warm-black flex items-center gap-1.5 shadow-md">
+            <i data-lucide="plus" class="w-4 h-4"></i> Upload Clip
+        </button>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="standup-upload-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/70 backdrop-blur-sm">
+        <div class="w-full max-w-md glass-panel rounded-3xl p-6 border border-white/10 relative text-left">
+            <button onclick="closeUploadModal()" class="absolute top-4 right-4 text-stone-500 hover:text-white">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <h3 class="text-lg font-bold font-outfit uppercase tracking-widest text-stone-200 mb-2">Upload Arena Tape</h3>
+            <p class="text-xs text-stone-400 mb-4">Introduce a video URL to test. Our AI analyzes your delivery style.</p>
+            
+            <div class="space-y-4">
+                <div class="space-y-1">
+                    <label class="text-[10px] font-outfit uppercase tracking-widest text-stone-400">Clip Title</label>
+                    <input type="text" id="upload-title" placeholder="E.g., Dangers of compile warnings" class="w-full bg-white/[0.03] border border-white/5 rounded-xl px-3 py-2 text-stone-200 text-xs focus:outline-none focus:border-gold/30">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-[10px] font-outfit uppercase tracking-widest text-stone-400">Video Url (MP4)</label>
+                    <input type="text" id="upload-video-url" placeholder="E.g., https://example.com/tape.mp4" class="w-full bg-white/[0.03] border border-white/5 rounded-xl px-3 py-2 text-stone-200 text-xs focus:outline-none focus:border-gold/30">
+                </div>
+                <button onclick="submitUploadClip()" class="w-full py-3 text-xs font-bold font-outfit uppercase tracking-wider rounded-xl bg-gradient-to-r from-amber-glow to-terracotta text-warm-black mt-2">
+                    Deploy Clip
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clips container -->
+    <div class="space-y-6" id="standup-list-container"></div>
+</section>

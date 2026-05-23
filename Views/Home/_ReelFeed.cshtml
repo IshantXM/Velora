@@ -1,0 +1,45 @@
+<section id="view-reels" class="view-panel hidden w-full max-w-xl mx-auto px-4 space-y-6">
+    <div class="flex items-center justify-between border-b border-white/5 pb-4 mb-2 text-left">
+        <div>
+            <h2 class="text-2xl font-bold font-playfair text-white flex items-center gap-2">
+                Aura Reels
+            </h2>
+            <p class="text-xs text-stone-400">Explore authentic vlogs and creative tapes shared by college nodes.</p>
+        </div>
+        <button onclick="openReelUploadModal()" class="px-4 py-2 text-xs font-semibold font-outfit uppercase tracking-widest rounded-xl bg-gradient-to-r from-amber-glow to-terracotta text-warm-black flex items-center gap-1.5 shadow-md shrink-0">
+            <i data-lucide="plus" class="w-4 h-4"></i> Upload Reel
+        </button>
+    </div>
+
+    <!-- Upload Reel Modal -->
+    <div id="reel-upload-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/70 backdrop-blur-sm">
+        <div class="w-full max-w-md glass-panel rounded-3xl p-6 border border-white/10 relative text-left">
+            <button onclick="closeReelUploadModal()" class="absolute top-4 right-4 text-stone-500 hover:text-white">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <h3 class="text-lg font-bold font-outfit uppercase tracking-widest text-stone-200 mb-2">Publish Aura Reel</h3>
+            <p class="text-xs text-stone-400 mb-4">Share your vibe with the college node network. Enter video URL and context tags.</p>
+            
+            <div class="space-y-4">
+                <div class="space-y-1">
+                    <label class="text-[10px] font-outfit uppercase tracking-widest text-stone-400">Video Caption</label>
+                    <input type="text" id="upload-reel-caption" placeholder="E.g., Working on a modular synth..." class="w-full bg-white/[0.03] border border-white/5 rounded-xl px-3 py-2 text-stone-200 text-xs focus:outline-none focus:border-gold/30">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-[10px] font-outfit uppercase tracking-widest text-stone-400">Video Url (MP4)</label>
+                    <input type="text" id="upload-reel-video-url" placeholder="E.g., https://example.com/video.mp4" class="w-full bg-white/[0.03] border border-white/5 rounded-xl px-3 py-2 text-stone-200 text-xs focus:outline-none focus:border-gold/30">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-[10px] font-outfit uppercase tracking-widest text-stone-400">Tags (comma separated)</label>
+                    <input type="text" id="upload-reel-tags" placeholder="E.g., synth, creativecoding" class="w-full bg-white/[0.03] border border-white/5 rounded-xl px-3 py-2 text-stone-200 text-xs focus:outline-none focus:border-gold/30">
+                </div>
+                <button onclick="submitUploadReel()" class="w-full py-3 text-xs font-bold font-outfit uppercase tracking-wider rounded-xl bg-gradient-to-r from-amber-glow to-terracotta text-warm-black mt-2">
+                    Publish Reel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reels list container populated dynamically by app.js -->
+    <div id="reels-list-container" class="space-y-6"></div>
+</section>
